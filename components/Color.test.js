@@ -12,12 +12,19 @@ const mockColor = {
   blueValue: 33,
   intensityValue: 55,
 };
+mockColor.contrastRatio = getContrastRatio(
+  mockColor.redValue,
+  mockColor.greenValue,
+  mockColor.blueValue
+);
+mockColor.luminance = (mockColor.contrastRatio - 1) * 5;
 
 const mockProps = {
   red: mockColor.redValue,
   green: mockColor.greenValue,
   blue: mockColor.blueValue,
   intensity: mockColor.intensityValue,
+  luminance: mockColor.luminance,
 };
 
 test("renders UI correctly", () => {
@@ -62,14 +69,9 @@ test("fills the color specified by the red, green, and blue props", () => {
   expect(getByTestId("color")).toHaveStyle({ fill: expectedColor });
 });
 
-test("is located at the position specified by the prop values", () => {
-  const contrastRatio = getContrastRatio(
-    mockColor.redValue,
-    mockColor.greenValue,
-    mockColor.blueValue
-  );
+test("is located at the position specified by the intensity and luminance props", () => {
   const expectedX = mockColor.intensityValue.toString();
-  const expectedY = (100 - (contrastRatio - 1) * 5).toFixed();
+  const expectedY = (100 - mockColor.luminance).toFixed();
 
   const { getByTestId } = render(
     <svg>

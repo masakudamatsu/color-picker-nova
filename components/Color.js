@@ -1,14 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import getContrastRatio from "../utils/getContrastRatio";
 
-function Color({ red, green, blue, intensity }) {
+function Color({ red, green, blue, intensity, luminance }) {
   const fillColor = `rgb(${red}, ${green}, ${blue})`;
 
   const locationX = intensity;
 
-  const contrastRatio = getContrastRatio(red, green, blue);
-  const locationY = 100 - (contrastRatio - 1) * 5;
+  const locationY = 100 - luminance;
 
   return (
     <rect
@@ -27,6 +25,7 @@ Color.propTypes = {
   green: PropTypes.number,
   blue: PropTypes.number,
   intensity: PropTypes.number,
+  luminance: PropTypes.number,
 };
 
 export default Color;
