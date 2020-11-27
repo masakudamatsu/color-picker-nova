@@ -1,5 +1,7 @@
+import ColorTriangle from "../components/ColorTriangle";
+
 function HomePage() {
-  return <div>Welcome to Next.js!</div>;
+  return <ColorTriangle />;
 }
 
 export default HomePage;
