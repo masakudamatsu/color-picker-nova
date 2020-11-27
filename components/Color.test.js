@@ -35,7 +35,7 @@ test('renders UI correctly', () => {
           style="fill: rgb(123, 22, 33);"
           width="1"
           x="55"
-          y="95.10"
+          y="95"
         />
       </svg>
     </div>
@@ -69,7 +69,7 @@ test('is located at the position specified by the prop values', () => {
     mockColor.blueValue,
   );
   const expectedX = mockColor.intensityValue.toString();
-  const expectedY = (100 - (contrastRatio - 1) * 5).toFixed(2);
+  const expectedY = (100 - (contrastRatio - 1) * 5).toFixed();
 
   const {getByTestId} = render(
     <svg>

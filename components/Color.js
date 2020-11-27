@@ -14,7 +14,7 @@ function Color({ red, green, blue, intensity }) {
     <rect
       data-testid="color"
       x={locationX.toFixed()}
-      y={locationY.toFixed(2)}
+      y={locationY.toFixed()}
       width="1"
       height="1"
       style={{ fill: fillColor }}
