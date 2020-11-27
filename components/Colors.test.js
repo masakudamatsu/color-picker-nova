@@ -1,29 +1,31 @@
-import React from 'react';
-import {render} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import {axe} from 'jest-axe';
+import React from "react";
+import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 
-import Colors from './Colors';
+import Colors from "./Colors";
 
 const mockProps = {
+  handleHover: jest.fn(),
+  handleUnhover: jest.fn(),
   intensity: 50,
 };
 
-test('is accessible', async () => {
-  const {container} = render(
+test("is accessible", async () => {
+  const { container } = render(
     <svg>
       <Colors {...mockProps} />
-    </svg>,
+    </svg>
   );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
 
-test('renders UI correctly for intensity prob value of 100', () => {
-  const {container} = render(
+test("renders UI correctly for intensity prob value of 100", () => {
+  const { container } = render(
     <svg>
       <Colors {...mockProps} intensity={100} />
-    </svg>,
+    </svg>
   );
   expect(container).toMatchInlineSnapshot(`
     <div>
@@ -43,11 +45,11 @@ test('renders UI correctly for intensity prob value of 100', () => {
   `);
 });
 
-test('renders UI correctly for intensity prob value of 0', () => {
-  const {container} = render(
+test("renders UI correctly for intensity prob value of 0", () => {
+  const { container } = render(
     <svg>
       <Colors {...mockProps} intensity={0} />
-    </svg>,
+    </svg>
   );
   expect(container).toMatchInlineSnapshot(`
     <div>

@@ -19,13 +19,34 @@ mockColor.contrastRatio = getContrastRatio(
 );
 mockColor.luminance = (mockColor.contrastRatio - 1) * 5;
 
+const mockHandleHover = jest.fn();
+const mockHandleUnhover = jest.fn();
+
 const mockProps = {
   red: mockColor.redValue,
   green: mockColor.greenValue,
   blue: mockColor.blueValue,
+  handleHover: mockHandleHover,
+  handleUnhover: mockHandleUnhover,
   intensity: mockColor.intensityValue,
   luminance: mockColor.luminance,
 };
+
+test("calls handleHover with the RGB code when the user hovers and then calls handleUnhover when the user unhovers", () => {
+  const expectedRgbCode = `rgb(${mockColor.redValue}, ${mockColor.greenValue}, ${mockColor.blueValue})`;
+  const { getByTestId } = render(
+    <svg>
+      <Color {...mockProps} />
+    </svg>
+  );
+  userEvent.hover(getByTestId("color"));
+  expect(mockHandleHover).toHaveBeenCalledWith(expectedRgbCode);
+  expect(mockHandleHover).toHaveBeenCalledTimes(1);
+  expect(mockHandleUnhover).not.toHaveBeenCalled();
+  userEvent.unhover(getByTestId("color"));
+  expect(mockHandleHover).toHaveBeenCalledTimes(1);
+  expect(mockHandleUnhover).toHaveBeenCalledTimes(1);
+});
 
 test("renders UI correctly", () => {
   const { container } = render(

@@ -3,10 +3,17 @@ import PropTypes from "prop-types";
 
 import Colors from "./Colors";
 
-function ColorTriangle() {
+function ColorTriangle({ handleHover, handleUnhover }) {
   let colorsSet = [];
   for (let x = 0; x <= 100; x++) {
-    const newColors = <Colors key={`colors${x}`} intensity={x} />;
+    const newColors = (
+      <Colors
+        key={`colors${x}`}
+        handleHover={handleHover}
+        handleUnhover={handleUnhover}
+        intensity={x}
+      />
+    );
     colorsSet.push(newColors);
   }
   return (
@@ -27,6 +34,9 @@ function ColorTriangle() {
   );
 }
 
-ColorTriangle.propTypes = {};
+ColorTriangle.propTypes = {
+  handleHover: PropTypes.func,
+  handleUnhover: PropTypes.func,
+};
 
 export default ColorTriangle;

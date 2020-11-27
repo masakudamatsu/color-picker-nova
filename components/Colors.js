@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Color from "./Color";
 import getContrastRatio from "../utils/getContrastRatio";
 
-function Colors({ intensity }) {
+function Colors({ handleHover, handleUnhover, intensity }) {
   const x = intensity;
   let colors = [];
   let prevContrastRatioInPercent;
@@ -22,6 +22,8 @@ function Colors({ intensity }) {
           red={red}
           green={green}
           blue={blue}
+          handleHover={handleHover}
+          handleUnhover={handleUnhover}
           intensity={x}
           luminance={contrastRatioInPercent}
         />
@@ -34,6 +36,8 @@ function Colors({ intensity }) {
 }
 
 Colors.propTypes = {
+  handleHover: PropTypes.func,
+  handleUnhover: PropTypes.func,
   intensity: PropTypes.number,
 };
 
