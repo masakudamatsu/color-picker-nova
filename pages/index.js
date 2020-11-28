@@ -1,10 +1,9 @@
-import React from "react";
-import ColorTriangle from "../components/ColorTriangle";
+import React from 'react';
+import ColorTriangle from '../components/ColorTriangle';
 
 function HomePage() {
   const [selectedColor, setSelectedColor] = React.useState(null);
-
-  const handleHover = (rgbCode) => {
+  const handleHover = rgbCode => {
     setSelectedColor(rgbCode);
   };
 
@@ -13,11 +12,9 @@ function HomePage() {
   };
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{width: '100%'}}>
       <ColorTriangle handleHover={handleHover} handleUnhover={handleUnhover} />
-      <p style={{ fontFamily: "system-ui", fontSize: "50px" }}>
-        {selectedColor}
-      </p>
+      <p style={{fontFamily: 'system-ui', fontSize: '50px'}}>{selectedColor}</p>
     </div>
   );
 }
