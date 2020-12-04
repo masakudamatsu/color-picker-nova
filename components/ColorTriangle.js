@@ -1,6 +1,7 @@
 import React from 'react';
 import {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import getContrastRatio from '../utils/getContrastRatio';
 import getMousePosition from '../utils/getMousePosition';
@@ -12,6 +13,8 @@ import mixHueWithGray from '../utils/mixHueWithGray';
 //   justify-content: space-between;
 //   width: 100%;
 // `;
+
+const Canvas = styled.canvas``;
 
 const Swatch = styled.div`
   align-items: center;
@@ -27,7 +30,7 @@ const Swatch = styled.div`
   }
 `;
 
-const ColorTriangle = () => {
+const ColorTriangle = ({resolution = 3}) => {
   // set up canvas after the initial rendering
   const canvas = useRef();
   const [canvasContext, setCanvasContext] = useState();
@@ -58,7 +61,12 @@ const ColorTriangle = () => {
         brightestRgb.b,
       );
       const minY = Math.round(100 - (brightestContrastRatio - 1) * 5);
-      canvasContext.fillRect(x * 10, minY * 10, 10, 10);
+      canvasContext.fillRect(
+        x * resolution,
+        minY * resolution,
+        resolution,
+        resolution,
+      );
 
       let prevY;
       for (var grayValue = 0; grayValue < 255; grayValue++) {
@@ -68,7 +76,12 @@ const ColorTriangle = () => {
 
         if (y !== prevY && y > minY) {
           canvasContext.fillStyle = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-          canvasContext.fillRect(x * 10, y * 10, 10, 10);
+          canvasContext.fillRect(
+            x * resolution,
+            y * resolution,
+            resolution,
+            resolution,
+          );
           prevY = y;
         }
       }
@@ -90,21 +103,25 @@ const ColorTriangle = () => {
     setSelectedColor(rgb);
   };
 
+  const canvasWidthPx = `${101 * resolution}px`;
   return (
     <>
       <canvas
         data-testid="color-triangle"
         ref={canvas}
-        width="1010px"
-        height="1010px"
+        width={canvasWidthPx}
+        height={canvasWidthPx}
         onClick={handleClick}
-        style={{width: '1010px'}}
       />
       <Swatch data-testid="swatch" rgb={selectedColor}>
         {selectedColor}
       </Swatch>
     </>
   );
+};
+
+ColorTriangle.propTypes = {
+  resolution: PropTypes.number,
 };
 
 export default ColorTriangle;
