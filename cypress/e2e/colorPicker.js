@@ -1,32 +1,43 @@
-describe('Color Picker', () => {
+describe('Clicking a color returns its swatch with color code', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-  it('Clicking a color returns its swatch with color code', () => {
-    const white = 'rgb(255, 255, 255)';
-    cy.findByTestId('color-triangle').click(0, 0);
-    cy.findByTestId('swatch')
-      .should('have.css', 'background-color', white)
-      .should('have.text', white);
-    const black = 'rgb(0, 0, 0)';
-    cy.findByTestId('color-triangle').click(0, 1000);
-    cy.findByTestId('swatch')
-      .should('have.css', 'background-color', black)
-      .should('have.text', black);
-    const red = 'rgb(255, 0, 0)';
-    cy.findByTestId('color-triangle').click(1000, 790);
-    cy.findByTestId('swatch')
-      .should('have.css', 'background-color', red)
-      .should('have.text', red);
-    const midgray = 'rgb(187, 187, 187)';
-    cy.findByTestId('color-triangle').click(0, 500);
-    cy.findByTestId('swatch')
-      .should('have.css', 'background-color', midgray)
-      .should('have.text', midgray);
-    const midred = 'rgb(207, 80, 80)';
-    cy.findByTestId('color-triangle').click(500, 800);
-    cy.findByTestId('swatch')
-      .should('have.css', 'background-color', midred)
-      .should('have.text', midred);
+  const resolution = 10;
+  const testInputOutput = [
+    {
+      clickX: 0,
+      clickY: 0,
+      outputColor: 'rgb(255, 255, 255)',
+    },
+    {
+      clickX: 0,
+      clickY: 100 * resolution,
+      outputColor: 'rgb(0, 0, 0)',
+    },
+    {
+      clickX: 100 * resolution,
+      clickY: 79 * resolution,
+      outputColor: 'rgb(255, 0, 0)',
+    },
+    {
+      clickX: 0,
+      clickY: 50 * resolution,
+      outputColor: 'rgb(187, 187, 187)',
+    },
+    {
+      clickX: 50 * resolution,
+      clickY: 80 * resolution,
+      outputColor: 'rgb(207, 80, 80)',
+    },
+  ];
+  testInputOutput.forEach(options => {
+    it(`Clicking (${options.clickX.toString()}, ${options.clickY.toString()}) returns ${
+      options.outputColor
+    }`, () => {
+      cy.findByTestId('color-triangle').click(options.clickX, options.clickY);
+      cy.findByTestId('swatch')
+        .should('have.css', 'background-color', options.outputColor)
+        .should('have.text', options.outputColor);
+    });
   });
 });
