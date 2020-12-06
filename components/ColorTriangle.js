@@ -86,7 +86,7 @@ const ColorTriangle = ({resolution = 3}) => {
         }
       }
     }
-  }, [canvasContext]);
+  });
 
   // handleClick
   const [selectedColor, setSelectedColor] = useState('');
