@@ -11,17 +11,14 @@ const mockProps = {};
 describe.skip('delete this line', () => {
   test('renders UI correctly', () => {
     const {container} = render(<StyledComponent {...mockProps} />);
-    expect(container).toMatchInlineSnapshot(`
-    .c0 {
-      width: 100%;
-    }
+    expect(container).toMatchInlineSnapshot();
+  });
 
-    <div>
-      <div
-        class="c0"
-      />
-    </div>
-  `);
+  test('rerenders with a new prop value', () => {
+    const {container, rerender} = render(<Swatch {...mockProps} />);
+    const newProp = '';
+    rerender(<Swatch propName={newProp} />);
+    expect(container).toMatchInlineSnapshot();
   });
 
   test('is accessible', async () => {
