@@ -1,4 +1,4 @@
-import ColorTriangle from 'components/ColorTriangle';
+import ColorPicker from 'components/ColorPicker';
 import SideMarginRegulator from 'styledComponents/SideMarginRegulator';
 
 import useWindowWidth from 'utils/useWindowWidth';
@@ -25,7 +25,7 @@ function HomePage() {
   } // see https://stackoverflow.com/questions/55151041/window-is-not-defined-in-next-js-react-app for why this style of case handling is best for performance
   return (
     <SideMarginRegulator>
-      <ColorTriangle resolution={resolution} />
+      <ColorPicker resolution={resolution} />
     </SideMarginRegulator>
   );
 }
