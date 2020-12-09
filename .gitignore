@@ -6,6 +6,7 @@
 # testing
 /cypress/videos
 /cypress/screenshots
+/cypress/snapshots
 
 # production
 /build
@@ -16,3 +17,9 @@
 
 # files related to the project (Mood board etc.)
 resources/
+
+.nyc_output/
+
+coverage/
+
+*.png
