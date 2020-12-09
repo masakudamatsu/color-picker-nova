@@ -5,7 +5,12 @@ import getContrastRatio from '../utils/getContrastRatio';
 import getMousePosition from '../utils/getMousePosition';
 import mixHueWithGray from '../utils/mixHueWithGray';
 
-const Canvas = ({resolution = 3, setSelectedColor}) => {
+const Canvas = ({
+  resolution = 3,
+  setSelectedColor = () => {
+    return null;
+  },
+}) => {
   // set up canvas after the initial rendering
   const canvas = useRef();
   const [canvasContext, setCanvasContext] = useState();
